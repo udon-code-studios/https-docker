@@ -1,0 +1,1 @@
+NGINX configuration files are placed in this directory.

@@ -1,0 +1,1 @@
+Certbot challenge files are served from this directory.
