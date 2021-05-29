@@ -1,0 +1,33 @@
+# file: docker-compose.yml
+
+version: "3"
+
+services:
+
+    # serves website at ./html and certbot challenge files at ./certbot/www
+    nginx:
+        image: nginx:latest
+        restart: unless-stopped
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./etc/nginx/conf.d:/etc/nginx/conf.d  # nginx configurations
+            - ./html:/usr/share/nginx/html          # website files to serve
+            - ./etc/letsencrypt:/etc/letsencrypt    # letsencrypt certificates
+            - ./certbot/www:/var/www/certbot        # certbot challenge files to serve
+        # reload nginx every 6 hours in case of updated certificates or challenges
+        entrypoint: /bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g "daemon off;"'
+    
+    # Let's Encrypt CA client to automatically renew HTTPS certificates
+    certbot:
+        image: certbot/certbot:latest
+        restart: unless-stopped
+        volumes:
+            - ./etc/letsencrypt:/etc/letsencrypt    # letsencrypt certificates
+            - ./certbot/www:/var/www/certbot        # certbot challenge files to serve
+        # attempt to renew certificates every 12 hours
+        entrypoint: /bin/sh -c 'while :; do certbot renew; sleep 12h & wait $${!}; done;'
+
+#
+# end of file: docker-compose.yml
