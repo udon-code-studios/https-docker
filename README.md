@@ -4,7 +4,7 @@ This multi-container app serves an HTTPS website using NGINX with the `./html` d
 
 ## Initial Setup
 
-1. Map the domain name to the IP address of website host (e.g. using an A record in Google Domains or Freenom).
+1. Map the target domain name to the IP address of website host (e.g. using an A record in Google Domains or Freenom).
 2. After cloning this repository, launch an NGINX instance to handle the initial certbot challenge process using the `initial-setup.conf` configuration file.
 
 ```
