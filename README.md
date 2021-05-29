@@ -1,6 +1,6 @@
 # HTTPS with automatic certificate renewal
 
-This multi-container app serves an HTTPS website using NGINX with the `./html` directory as its web root. Certbot is used to automate the certificate renewall process with Let's Encrypt CA.
+This multi-container app serves an HTTPS website using NGINX with the `./html` directory as its web root. Certbot is used to automate the certificate renewall process with [Let's Encrypt CA](https://letsencrypt.org/).
 
 ## Initial Setup
 
