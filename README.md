@@ -1,5 +1,7 @@
 # HTTPS with automatic certificate renewal
 
+This multi-container app serves an HTTPS website using NGINX with the `./html` directory as its web root. Certbot is used to automate the certificate renewall process with Let's Encrypt CA.
+
 ## Initial Setup
 
 1. Map the domain name to the IP address of website host (e.g. using an A record in Google Domains or Freenom).
