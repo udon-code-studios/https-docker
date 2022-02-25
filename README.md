@@ -8,7 +8,7 @@ This multi-container app serves an HTTPS website using NGINX with the `./html` d
 2. After cloning this repository, launch an NGINX instance to handle the initial certbot challenge process using the `initial-setup.conf` configuration file.
 
 ```sh
-$ sudo docker run -it --rm --name initial_setup_nginx -d \
+sudo docker run -it --rm --name initial_setup_nginx -d \
     -v $(pwd)/initial-setup.conf:/etc/nginx/conf.d/app.conf \
     -v $(pwd)/etc/letsencrypt:/etc/letsencrypt \
     -v $(pwd)/certbot/www:/var/www/certbot \
@@ -18,7 +18,7 @@ $ sudo docker run -it --rm --name initial_setup_nginx -d \
 3. Obtain a new certificate by using the `certonly --webroot` command. When prompted for the webroot, input: `/var/www/certbot`
 
 ```sh
-$ sudo docker run -it --rm --name initial_setup_certbot \
+sudo docker run -it --rm --name initial_setup_certbot \
     -v $(pwd)/etc/letsencrypt:/etc/letsencrypt \
     -v $(pwd)/certbot/www:/var/www/certbot \
     certbot/certbot:latest certonly --webroot
@@ -27,7 +27,7 @@ $ sudo docker run -it --rm --name initial_setup_certbot \
 4. Kill the NGINX instance used for initial configuration.
 
 ```sh
-$ sudo docker kill initial_setup_nginx
+sudo docker kill initial_setup_nginx
 ```
 
 ## Start HTTPS web server
@@ -37,7 +37,7 @@ Once the key and certificate is obtained, the HTTPS web server can be configured
 Replace each instance of "subparprogramming.org" in `./etc/nginx/conf.d/app.conf` with the target domain name, place website files to host in `./html`, then launch the HTTPS web server using the following command:
 
 ```sh
-$ sudo docker-compose up -d
+sudo docker-compose up -d
 ```
 
 ## Stop HTTPS web server
@@ -45,5 +45,5 @@ $ sudo docker-compose up -d
 Stop the HTTPS web server using the following command:
 
 ```sh
-$ sudo docker-compose down
+sudo docker-compose down
 ```
